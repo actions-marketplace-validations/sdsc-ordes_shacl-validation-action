@@ -1,3 +1,4 @@
+![Action Test](https://github.com/SDSC-ORD/shacl-validation-action/actions/workflows/test.yaml/badge.svg)
 # SHACL validation action
 
 This action performs SHACL validation based on the [TopQuadrant SHACL API](https://github.com/TopQuadrant/shacl), accepting only `.ttl` format as input.
