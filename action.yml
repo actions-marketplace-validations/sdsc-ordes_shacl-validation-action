@@ -1,15 +1,31 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'SHACL validation'
+description: 'This action will validate RDF graphs in `.ttl` format using the [TopQuadrant SHACL API](https://github.com/TopQuadrant/shacl), which passed [100% of the tests](https://w3c.github.io/data-shapes/data-shapes-test-suite/#validate-rdf-data-tests) related to RDF validation.'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  validation-data: 
+    description: 'RDF data in .ttl format to validate'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  validation-rules:
+    description: 'RDF data in .ttl format containing the constraints/SHACL rules'
+    required: false
+    default: 'None'
+  github_token:
+    description: 'GITHUB_TOKEN'
+    required: true
+    default: '${{ github.token }}'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.who-to-greet }}
+  using: 'composite'
+  steps:
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ inputs.github_token }}
+    - if: ${{ inputs.validation-rules == 'None' }}
+      shell: bash
+      run: |
+        docker run -v /var/run/docker.sock:/var/run/docker.sock -v ${{ github.workspace }}/${{ inputs.validation-data }}:/data/validation-data.ttl ghcr.io/sdsc-ord/shacl:latest validate -datafile /data/validation-data.ttl
+    - if: ${{ inputs.validation-rules != 'None' }}
+      shell: bash
+      run: |
+        docker run -v /var/run/docker.sock:/var/run/docker.sock -v ${{ github.workspace }}/${{ inputs.validation-data }}:/data/validation-data.ttl -v ${{ github.workspace }}/${{ inputs.validation-rules }}:/data/validation-rules.ttl ghcr.io/sdsc-ord/shacl:latest validate -datafile /data/validation-data.ttl -shapesfile /data/validation-rules.ttl

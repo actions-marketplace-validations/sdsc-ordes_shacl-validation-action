@@ -1,0 +1,23 @@
+name: Test GHA
+ 
+on: push
+
+jobs:
+  test-gha:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: valid-data
+        uses: ./
+        with:
+          validation-data: assets/data-correct.ttl
+      - name: invalid-data
+        uses: ./
+        continue-on-error: true
+        with:
+          validation-data: assets/data-incorrect.ttl
+      - run: echo "Invalid data was indeed invalid"
+        if: job.steps.invalid-data.status == failure()
+      - run: exit 1
+        if: job.steps.invalid-data.status == success()
