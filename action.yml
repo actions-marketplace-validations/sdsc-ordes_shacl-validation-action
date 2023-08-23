@@ -1,5 +1,5 @@
 name: 'SHACL validation'
-description: 'This action will validate RDF graphs in `.ttl` format using the [TopQuadrant SHACL API](https://github.com/TopQuadrant/shacl), which passed [100% of the tests](https://w3c.github.io/data-shapes/data-shapes-test-suite/#validate-rdf-data-tests) related to RDF validation.'
+description: 'This action will validate RDF graphs in `.ttl` format using the [TopQuadrant SHACL API](https://github.com/TopQuadrant/shacl).'
 inputs:
   validation-data: 
     description: 'RDF data in .ttl format to validate'
