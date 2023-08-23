@@ -21,7 +21,7 @@ You have two `.ttl` files in your repository: one with data and one with shapes.
 uses: actions/shacl-validation@v1
 with:
   validation-data: 'data.ttl'
-  validation-rules: 'shapes.ttl'
+  validation-shapes: 'shapes.ttl'
 ```
 
 # Advanced examples
