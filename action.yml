@@ -24,8 +24,8 @@ runs:
     - if: ${{ inputs.validation-shapes == 'None' }}
       shell: bash
       run: |
-        docker run -v /var/run/docker.sock:/var/run/docker.sock -v ${{ github.workspace }}/${{ inputs.validation-data }}:/data/validation-data.ttl ghcr.io/sdsc-ord/shacl:latest validate -datafile /data/validation-data.ttl
+        docker run -v /var/run/docker.sock:/var/run/docker.sock -v ${{ github.workspace }}/${{ inputs.validation-data }}:/data/validation-data.ttl ghcr.io/sdsc-ordes/shacl:latest validate -datafile /data/validation-data.ttl
     - if: ${{ inputs.validation-shapes != 'None' }}
       shell: bash
       run: |
-        docker run -v /var/run/docker.sock:/var/run/docker.sock -v ${{ github.workspace }}/${{ inputs.validation-data }}:/data/validation-data.ttl -v ${{ github.workspace }}/${{ inputs.validation-shapes }}:/data/validation-shapes.ttl ghcr.io/sdsc-ord/shacl:latest validate -datafile /data/validation-data.ttl -shapesfile /data/validation-shapes.ttl
+        docker run -v /var/run/docker.sock:/var/run/docker.sock -v ${{ github.workspace }}/${{ inputs.validation-data }}:/data/validation-data.ttl -v ${{ github.workspace }}/${{ inputs.validation-shapes }}:/data/validation-shapes.ttl ghcr.io/sdsc-ordes/shacl:latest validate -datafile /data/validation-data.ttl -shapesfile /data/validation-shapes.ttl
