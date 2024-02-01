@@ -9,7 +9,7 @@ This action performs SHACL validation based on the [TopQuadrant SHACL API](https
 You have a `.ttl` file in your repository containing both data and shapes.
 
 ```yaml
-uses: sdsc-ordes/shacl-validation-action@v1.0.0
+uses: sdsc-ordes/shacl-validation-action@v1.0.1
 with:
   validation-data: 'data.ttl'
 ```
@@ -19,7 +19,7 @@ with:
 You have two `.ttl` files in your repository: one with data and one with shapes.
 
 ```yaml
-uses: sdsc-ordes/shacl-validation-action@v1.0.0
+uses: sdsc-ordes/shacl-validation-action@v1.0.1
 with:
   validation-data: 'data.ttl'
   validation-shapes: 'shapes.ttl'
@@ -33,7 +33,7 @@ You have a `.ttl` file that must not pass validation and you would like the acti
 
 ```yaml
 name: invalid-data
-uses: sdsc-ordes/shacl-validation-action@v1.0.0
+uses: sdsc-ordes/shacl-validation-action@v1.0.1
 continue-on-error: true
 with:
   validation-data: 'invalid_data.ttl'
